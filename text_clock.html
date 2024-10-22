@@ -19,7 +19,9 @@
         }
         .time-text {
             font-size: 36px;
-            font-weight: bold;
+        }
+        .time {
+            font-weight: bold; /* Bold the time */
         }
     </style>
 </head>
@@ -30,7 +32,7 @@
 
     <script>
         // Arrays for number words
-        const numberWords = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", 
+        const numberWords = ["oh", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", 
                             "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
         const tensWords = ["twenty", "thirty", "forty", "fifty"];
 
@@ -55,9 +57,9 @@
             const hoursText = numberToText(hours);
             const minutesText = minutes < 10 ? `zero ${numberToText(minutes)}` : numberToText(minutes);
 
-            // Update the time text
-            const timeString = `it is ${hoursText} ${minutesText}`;
-            document.getElementById('time-text').textContent = timeString;
+            // Update the time text with bold on time part
+            const timeString = `It is <span class="time">${hoursText} ${minutesText}</span>`;
+            document.getElementById('time-text').innerHTML = timeString; // Use innerHTML to handle the span
         }
 
         // Initial update and set interval to update every minute
