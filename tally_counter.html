@@ -6,16 +6,20 @@
     <title>Coffee Tally Counter</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Courier, monospace;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f4f4f4;
+            background-color: transparent; /* Clear background */
         }
         .counter-container {
             text-align: center;
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
         }
         .digits {
             display: flex;
@@ -36,26 +40,36 @@
         .controls {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 20px;
         }
         button {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 10px;
+            font-size: 32px; /* Larger button text */
+            font-weight: bold; /* Thicker text */
             cursor: pointer;
+            background-color: transparent; /* No background */
+            border: none; /* No border */
+        }
+        button:active {
+            transform: scale(0.9); /* Slightly shrink the button when clicked */
         }
     </style>
 </head>
 <body>
     <div class="counter-container">
+        <!-- Title for the coffee counter -->
+        <div class="title">Coffee Counter</div>
+        
         <div class="digits">
             <div class="digit" id="digit1">0</div>
             <div class="digit" id="digit2">0</div>
             <div class="digit" id="digit3">0</div>
             <div class="digit" id="digit4">0</div>
         </div>
+
         <div class="controls">
-            <button id="decrement">-</button>
-            <button id="increment">+</button>
+            <button id="decrement">−</button> <!-- Larger minus sign -->
+            <button id="increment">+</button> <!-- Larger plus sign -->
         </div>
     </div>
 
