@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Tally Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .counter-container {
+            text-align: center;
+        }
+        .digits {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .digit {
+            width: 50px;
+            height: 80px;
+            margin: 0 5px;
+            border: 2px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            background-color: white;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="counter-container">
+        <div class="digits">
+            <div class="digit" id="digit1">0</div>
+            <div class="digit" id="digit2">0</div>
+            <div class="digit" id="digit3">0</div>
+            <div class="digit" id="digit4">0</div>
+        </div>
+        <div class="controls">
+            <button id="decrement">-</button>
+            <button id="increment">+</button>
+        </div>
+    </div>
+
+    <script>
+        let count = 0;
+
+        function updateDigits() {
+            // Pad the count with leading zeros to always show 4 digits
+            let paddedCount = count.toString().padStart(4, '0');
+            
+            // Update each digit
+            document.getElementById('digit1').textContent = paddedCount[0];
+            document.getElementById('digit2').textContent = paddedCount[1];
+            document.getElementById('digit3').textContent = paddedCount[2];
+            document.getElementById('digit4').textContent = paddedCount[3];
+        }
+
+        // Increment button functionality
+        document.getElementById('increment').addEventListener('click', () => {
+            count = Math.min(count + 1, 9999); // Limit to 4 digits
+            updateDigits();
+        });
+
+        // Decrement button functionality
+        document.getElementById('decrement').addEventListener('click', () => {
+            count = Math.max(count - 1, 0); // Prevent negative count
+            updateDigits();
+        });
+
+        // Initial update to set the digits to 0000
+        updateDigits();
+    </script>
+</body>
+</html>
