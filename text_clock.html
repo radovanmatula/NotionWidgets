@@ -29,39 +29,34 @@
     </div>
 
     <script>
-        // Function to convert hours and minutes into words
-        function timeToWords(hours, minutes) {
-            const hourWords = ["twelve", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven"];
-            const minuteWords = ["o'clock", "five past", "ten past", "quarter past", "twenty past", "twenty-five past", "half past", 
-                                 "twenty-five to", "twenty to", "quarter to", "ten to", "five to"];
+        // Arrays for number words
+        const numberWords = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", 
+                            "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+        const tensWords = ["twenty", "thirty", "forty", "fifty"];
 
-            let hour = hours % 12;
-            if (hour === 0) hour = 12; // Handle 0 as 12 (for midnight/noon)
-            let nextHour = (hours + 1) % 12;
-            if (nextHour === 0) nextHour = 12;
-
-            let timeString;
-
-            if (minutes === 0) {
-                timeString = `It's ${hourWords[hour - 1]} ${minuteWords[0]}`;
-            } else if (minutes <= 30) {
-                let index = Math.floor(minutes / 5);
-                timeString = `It's ${minuteWords[index]} ${hourWords[hour - 1]}`;
+        // Convert a number to its text form
+        function numberToText(number) {
+            if (number < 20) {
+                return numberWords[number];
             } else {
-                let index = Math.floor((60 - minutes) / 5);
-                timeString = `It's ${minuteWords[6 + index]} ${hourWords[nextHour - 1]}`;
+                const tens = Math.floor(number / 10);
+                const units = number % 10;
+                return units === 0 ? tensWords[tens - 2] : `${tensWords[tens - 2]}-${numberWords[units]}`;
             }
-
-            return timeString;
         }
 
-        // Function to update the time text every minute
+        // Function to display the current time in words
         function updateTime() {
             const now = new Date();
             const hours = now.getHours();
             const minutes = now.getMinutes();
 
-            const timeString = timeToWords(hours, minutes);
+            // Convert hours and minutes to text
+            const hoursText = numberToText(hours);
+            const minutesText = minutes < 10 ? `zero ${numberToText(minutes)}` : numberToText(minutes);
+
+            // Update the time text
+            const timeString = `it is ${hoursText} ${minutesText}`;
             document.getElementById('time-text').textContent = timeString;
         }
 
@@ -69,7 +64,7 @@
         updateTime(); // Call once on load
         setInterval(updateTime, 60000); // Update every minute
 
-        // Ensure that the clock updates the moment the page is loaded
+        // Ensure the time updates on page load
         document.addEventListener("DOMContentLoaded", updateTime);
     </script>
 </body>
